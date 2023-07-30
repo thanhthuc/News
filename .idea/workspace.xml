@@ -5,18 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a181f92f-fad5-4003-b27a-06c8fa1fc410" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/images/bookmark_menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/home_menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/news.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/images/theme_menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/screens/screen_menu.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/small_component/page_number_action_view.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/small_component/published_dropdown_view.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/small_component/row_news_view.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/small_component/top_main_filter_view.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/screens/home_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/small_component/page_number_action_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/small_component/page_number_action_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/small_component/published_dropdown_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/small_component/published_dropdown_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/small_component/row_news_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/small_component/row_news_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/small_component/top_main_filter_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/small_component/top_main_filter_view.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +25,20 @@
       </list>
     </option>
   </component>
+  <component name="FlutterPreviewView" splitter-proportion="0.8347826" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2T41I0Zlc1ceOAsjqFpACQDEO4u" />
   <component name="ProjectLevelVcsManager">
@@ -80,7 +87,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
