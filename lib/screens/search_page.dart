@@ -51,13 +51,14 @@ class CustomSearchDelegate extends SearchDelegate<String> {
               crossAxisCount: 5,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              mainAxisExtent: 20
+              mainAxisExtent: 30
           ),
           itemBuilder: (context, index){
             var item = listSuggest[index];
             return Container(
+              padding: const EdgeInsets.all(5),
                 decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(3)),
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
                     color: Colors.black12),
                 child: Text(item)
             );
