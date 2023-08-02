@@ -25,10 +25,16 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     // TODO: implement buildResults
+    var resultList = list.firstWhere((element) {
+      if (element.contains(query)) {
+        return true;
+      }
+      return false;
+    });
     return Container(
       padding: const EdgeInsets.all(10),
       child: ListView.builder(
-        itemCount: 3,
+        itemCount: 5,
           itemBuilder: (context, index) {
         return const RowNews();
       }),
@@ -37,33 +43,29 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   }
 
   List<String> listSuggest = ["Flutter", "US", "Business", "Technology", "World", "Cars", "Homes", "Flutter",
-    "US", "Business", "Technology", "World", "Cars", "Homes"];
+    "US", "Business", "Technology", "World", "Cars", "Homes", "World", "Cars", "Homes"];
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
+
     return
-      Container(
-          padding: const EdgeInsets.all(10),
-          child: GridView.builder(
-          padding: const EdgeInsets.all(10),
-          itemCount: listSuggest.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 5,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              mainAxisExtent: 30
-          ),
-          itemBuilder: (context, index){
-            var item = listSuggest[index];
-            return Container(
-              padding: const EdgeInsets.all(5),
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(5)),
-                    color: Colors.black12),
-                child: Text(item)
-            );
-          })
-      );
+      Scrollable(
+          viewportBuilder: (context, index) {
+        return 
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 10,
+              children: listSuggest.map((item) {
+                return Container(
+                  // height: 10,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                        color: Colors.black12),
+                    child: Text(item)
+                );
+              }).toList()),);
+      });
   }
   
 }

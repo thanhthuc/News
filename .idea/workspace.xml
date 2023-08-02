@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a181f92f-fad5-4003-b27a-06c8fa1fc410" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/screens/detail_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/search_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/search_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/small_component/row_news_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/small_component/row_news_view.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
