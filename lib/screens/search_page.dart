@@ -63,10 +63,11 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   Widget buildSuggestions(BuildContext context) {
     return Scrollable(
         viewportBuilder: (context, index) {
-        return 
+        return
           Padding(
-            padding: const EdgeInsets.all(10),
-            child: Wrap(
+            padding: const EdgeInsets.all(5),
+            child:
+            Wrap(
               spacing: 10,
               runSpacing: 3,
               children: listSuggest.map((item) {
