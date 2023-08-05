@@ -9,20 +9,49 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:news/model/news_model.dart';
 import 'package:http/http.dart';
+import 'package:news/model/object_model.dart';
 
 abstract class BaseAPI {
   String get baseURL;
-  Future<List<News>> fetchNews(Client client);
+  Future<List<News>> fetchNews();
+  Future<List<NewsListObject>> fetchNewsListObject();
 }
 
-abstract class Parse {
-  List<News> parseNewsFrom(String jsonResponseBody);
+abstract class Parse<T> {
+  List<T> parseObjectFrom(String jsonResponseBody);
 }
 
-class APIClient implements BaseAPI, Parse {
+class ParseNews implements Parse {
+  @override
+  List<News> parseObjectFrom(String jsonResponseBody) {
+    // TODO: implement parseObjectFrom
+
+    var parsedObjectParent = jsonDecode(jsonResponseBody).cast<String, dynamic>();
+
+    if(kDebugMode) {
+      print("parsed: $parsedObjectParent");
+    }
+    var listNews = parsedObjectParent["articles"];
+    return listNews.map<News>((json) => News.fromJson(json)).toList();
+  }
+}
+
+class ParseNewObject implements Parse {
+  @override
+  List<NewsListObject> parseObjectFrom(String jsonResponseBody) {
+    // TODO: implement parseObjectFrom
+    var parsed = jsonDecode(jsonResponseBody);
+    if (kDebugMode) {
+      print("parsed: $parsed");
+    }
+    return parsed.map<NewsListObject>((json) => NewsListObject.fromJson(json)).toList();
+  }
+}
+
+class APIClient implements BaseAPI {
   // https://docs.flutter.dev/cookbook/networking/background-parsing
   // What is isolate?
-
+  Client _client = Client();
   String apiKey = "8ccb67aaefd4475ba20a6bb2ef79a35d";
 
   @override
@@ -31,19 +60,19 @@ class APIClient implements BaseAPI, Parse {
   String get baseURL => "https://newsapi.org/v2/everything?q=Apple&from=2023-08-03&sortBy=popularity&apiKey=$apiKey";
 
   @override
-  Future<List<News>> fetchNews(Client client) async {
-    final response = await client.get(Uri.parse(baseURL));
+  Future<List<News>> fetchNews() async {
+    final response = await _client.get(Uri.parse(baseURL));
     // List<News> list = parseNewsFrom(response.body); => app freeze for a moment
     // Use compute to isolate to background thread
-    return compute(parseNewsFrom, response.body);
+    var parseNewsFunc = ParseNews().parseObjectFrom;
+    return compute(parseNewsFunc, response.body);
   }
 
   @override
-  List<News> parseNewsFrom(String jsonResponseBody) {
-    // TODO: implement parseNewsFrom
-    final parsed = jsonDecode(jsonResponseBody).cast<Map<String, dynamic>>();
-    var listNews = parsed.map<News>((json) => News.fromJson(json as Map<String, dynamic>)).toList();
-    return listNews;
+  Future<List<NewsListObject>> fetchNewsListObject() async {
+    // TODO: implement fetchNewsListObject
+    final response = await _client.get(Uri.parse(baseURL));
+    var parseNewsListObject = ParseNewObject().parseObjectFrom;
+    return compute(parseNewsListObject, response.body);
   }
-
 }
