@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
+import 'package:news/model/news_model.dart';
+import 'package:news/small_component/news_list_view.dart';
 
 import '../small_component/row_news_view.dart';
 
 class CustomSearchDelegate extends SearchDelegate<String> {
-  List<String> list = ["1", "2"].toList();
+  List<News> searchList = [];
   @override
   List<Widget>? buildActions(BuildContext context) {
     // TODO: implement buildActions
@@ -25,21 +27,28 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     // TODO: implement buildResults
-    var resultList = list.firstWhere((element) {
-      if (element.contains(query)) {
+    List<News> resultList = searchList.where((element) {
+      bool searchInTitle = element.title!.contains(query);
+      bool searchInContent = element.content!.contains(query);
+      if (searchInTitle || searchInContent) {
         return true;
       }
       return false;
-    });
-    return Container(
-      padding: const EdgeInsets.all(10),
-      child: ListView.builder(
-        itemCount: 5,
-          itemBuilder: (context, index) {
-        return const RowNews();
-      }),
-      
-    );
+    }).toList();
+
+    print("query: $query");
+    print("result list: $resultList");
+    var result = [
+      News(title: "title",
+          content: "content",
+          url: "url",
+          description: "description",
+          publishedAt: "publishedAt",
+          imageURL: null,
+          dateTime: DateTime.now(),
+          timeToRead: "timeToRead",
+          timestamp: "timestamp")];
+    return NewsListView(list: result);
   }
 
   List<String> listSuggest = ["Flutter", "US", "Business", "Technology", "World", "Cars", "Homes", "Flutter",

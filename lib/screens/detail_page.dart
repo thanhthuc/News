@@ -1,9 +1,11 @@
 
 import 'package:flutter/material.dart';
 
-class DetailPage extends StatefulWidget {
-  const DetailPage({super.key});
+import '../model/news_model.dart';
 
+class DetailPage extends StatefulWidget {
+  final News news;
+  const DetailPage({super.key, required this.news});
   @override
   State<StatefulWidget> createState() => DetailPageState();
 }
@@ -11,7 +13,6 @@ class DetailPage extends StatefulWidget {
 // TODO: improvement sliver scroll for list page and detail page, add more list type of grid display
 // and more of dynamic height display use intrictsed size
 class DetailPageState extends State<DetailPage> {
-  var imageURL = "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg";
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -23,22 +24,22 @@ class DetailPageState extends State<DetailPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-          const Text("TitleTitleTitleTitleTitleTitleTitle",
-              style: TextStyle(
+                Text(widget.news.title ?? "",
+              style: const TextStyle(
                   fontStyle: FontStyle.normal,
                   fontSize: 30,
                   fontWeight: FontWeight.bold)
           ),
             Row(
-              children: const [
-                Text("timestamp"),
-                Spacer(),
-                Text("time to read")
+              children: [
+                Text(widget.news.timestamp ?? ""),
+                const Spacer(),
+                Text(widget.news.timeToRead ?? "")
               ]
             ),
-            Image.network(imageURL),
-            const Text("Description"),
-            const Text("ContentContentContentContentContentContentContentContentContentContent")
+                FadeInImage(placeholder: const AssetImage("assets/images/news.jpg"), image: NetworkImage(widget.news.imageURL ?? "")),
+                Text(widget.news.description ?? ""),
+                Text(widget.news.content ?? "")
       ]))
     );
   }

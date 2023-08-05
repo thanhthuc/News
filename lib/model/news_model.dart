@@ -13,6 +13,7 @@ class News {
   String? imageURL;
   DateTime? dateTime;
   String? timeToRead;
+  String? timestamp;
   News ({
     required this.title,
     required this.content,
@@ -21,7 +22,8 @@ class News {
     required this.publishedAt,
     required this.imageURL,
     required this.dateTime,
-    required this.timeToRead
+    required this.timeToRead,
+    required this.timestamp
   }) {
     if (kDebugMode) {
       print("init News Model title: $imageURL");
@@ -37,6 +39,7 @@ class News {
         publishedAt: json["publishedAt"] as String?,
         imageURL: json["urlToImage"] as String?,
         dateTime: json["DateTime"] as DateTime?,
-        timeToRead: json["timeToRead"] as String?);
+        timeToRead: json["timeToRead"] as String?,
+        timestamp: json["timestamp"] as String?);
   }
 }
