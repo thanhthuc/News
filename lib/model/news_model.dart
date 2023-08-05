@@ -26,7 +26,7 @@ class News {
     required this.timestamp
   }) {
     if (kDebugMode) {
-      print("init News Model title: $imageURL");
+      print("init News Model title");
     }
   }
 

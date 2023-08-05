@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:news/api_client/api_client.dart';
 import 'package:news/model/news_model.dart';
 import 'package:news/small_component/news_list_view.dart';
 
@@ -7,11 +8,13 @@ import '../small_component/row_news_view.dart';
 
 class CustomSearchDelegate extends SearchDelegate<String> {
   List<News> searchList = [];
+  final APIClient _apiClient = APIClient();
   @override
   List<Widget>? buildActions(BuildContext context) {
     // TODO: implement buildActions
     return [IconButton(icon: const Icon(Icons.close), onPressed: () {
       query = '';
+      showSuggestions(context);
     })];
   }
 
@@ -27,53 +30,56 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     // TODO: implement buildResults
-    List<News> resultList = searchList.where((element) {
-      bool searchInTitle = element.title!.contains(query);
-      bool searchInContent = element.content!.contains(query);
-      if (searchInTitle || searchInContent) {
-        return true;
-      }
-      return false;
-    }).toList();
+    // Call api
+    var queryParameter = {
+      "q":query,
+      // "from":2023-08-05,
+      // "pageSize":5,
+      "sortBy":"popularity",
+      "apiKey":_apiClient.apiKey
+    };
 
-    print("query: $query");
-    print("result list: $resultList");
-    var result = [
-      News(title: "title",
-          content: "content",
-          url: "url",
-          description: "description",
-          publishedAt: "publishedAt",
-          imageURL: null,
-          dateTime: DateTime.now(),
-          timeToRead: "timeToRead",
-          timestamp: "timestamp")];
-    return NewsListView(list: result);
+    return Container(
+      padding: const EdgeInsets.all(20),
+      child:
+      FutureBuilder<List<News>>(
+        future: _apiClient.fetchNewsWithParameter(queryParameter),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return const Center(child: Text("Has an error, please reset search"));
+          } else if (snapshot.hasData) {
+            return NewsListView(list: snapshot.data!);
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        }
+      ),
+    );
   }
 
-  List<String> listSuggest = ["Flutter", "US", "Business", "Technology", "World", "Cars", "Homes", "Flutter",
-    "US", "Business", "Technology", "World", "Cars", "Homes", "World", "Cars", "Homes"];
+  List<String> listSuggest = ["Flutter", "US", "Business", "Technology", "World", "Cars", "Homes", "Swift",
+    "iOS", "Android", "AI", "Peace", "Asia", "Japan", "China", "Automations", "Homes"];
   @override
   Widget buildSuggestions(BuildContext context) {
-
-    return
-      Scrollable(
-          viewportBuilder: (context, index) {
+    return Scrollable(
+        viewportBuilder: (context, index) {
         return 
           Padding(
             padding: const EdgeInsets.all(10),
             child: Wrap(
-              spacing: 8,
-              runSpacing: 10,
+              spacing: 10,
+              runSpacing: 3,
               children: listSuggest.map((item) {
-                return Container(
-                  // height: 10,
-                    decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        color: Colors.black12),
-                    child: Text(item)
-                );
-              }).toList()),);
+                return
+                  ButtonTheme(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        query = item;
+                      },
+                      child: Text(item),
+                    ),
+                  );
+              }).toList()));
       });
   }
   

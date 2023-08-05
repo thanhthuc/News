@@ -17,6 +17,7 @@ abstract class BaseAPI {
   late Map<String, dynamic> parameters;
   Future<List<News>> fetchNews();
   Future<List<NewsListObject>> fetchNewsListObject();
+  Future<List<News>> fetchNewsWithParameter(Map<String, dynamic> parameters);
 }
 
 abstract class Parse<T> {
@@ -98,5 +99,18 @@ class APIClient implements BaseAPI {
     final response = await _client.get(Uri.parse(baseURL));
     var parseNewsListObject = ParseNewObject().parseObjectFrom;
     return compute(parseNewsListObject, response.body);
+  }
+
+  @override
+  Future<List<News>> fetchNewsWithParameter(Map<String, dynamic> parameters) async {
+    // TODO: implement fetchNewsWithParameter
+    Uri uri = Uri.https(baseURL, "/v2/everything", parameters);
+    final response = await _client.get(uri, headers: {
+      HttpHeaders.contentTypeHeader: "application/json",
+    });
+    // List<News> list = parseNewsFrom(response.body); => app freeze for a moment
+    // Use compute to isolate to background thread
+    var parseNewsFunc = ParseNews().parseObjectFrom;
+    return compute(parseNewsFunc, response.body);
   }
 }
