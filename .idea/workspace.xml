@@ -10,12 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a181f92f-fad5-4003-b27a-06c8fa1fc410" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/screens/top_trend_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/state_management/bloc/bloc.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/state_management/getx/get_x.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/state_management/provider/provider.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/state_management/stream/stream.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/api_client/api_client.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/api_client/api_client.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/api_client/error_handling.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/api_client/error_handling.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/small_component/published_dropdown_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/small_component/published_dropdown_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/small_component/news_list_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/small_component/news_list_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +68,11 @@
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/state_management" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter">
