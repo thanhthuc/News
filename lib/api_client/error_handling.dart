@@ -1,1 +1,1 @@
-enum ErrorType {  ok,  badRequest,  unAuthorized,  tooManyRequest,  severError,}class ErrorHandler {}
+enum ErrorType {  ok, // 200  badRequest, //404  unAuthorized, // 400  tooManyRequest, //403  severError, // 500}class ErrorHandler {}
