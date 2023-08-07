@@ -3,8 +3,14 @@
 // This is stateful widget
 import 'package:flutter/material.dart';
 
+enum LeftMenuAction {
+  home,
+  bookmark,
+}
+
 class LeftMenu extends StatefulWidget {
-  const LeftMenu({super.key});
+  final Function(LeftMenuAction) callback;
+  const LeftMenu({super.key, required this.callback});
 
   @override
   State<StatefulWidget> createState() {
@@ -15,11 +21,11 @@ class LeftMenu extends StatefulWidget {
 
 class LeftMenuState extends State<LeftMenu> {
   bool light = true;
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Drawer(child: ListView(children: [
+    return Drawer(
+        child: ListView(children: [
        DrawerHeader(
           decoration: BoxDecoration(color: Theme.of(context).secondaryHeaderColor),
           child: Column(children: [
@@ -30,12 +36,26 @@ class LeftMenuState extends State<LeftMenu> {
       ),
       Column(
         children: [
-          ListTile(
+          GestureDetector(
+            onTap: (){
+              widget.callback(LeftMenuAction.home);
+              Navigator.pop(context);
+            },
+            child: ListTile(
               leading: Image.asset("assets/images/home_menu.png", width: 25, height: 25,),
-              title: const Text("Home")),
-          ListTile(
-              leading: Image.asset("assets/images/bookmark_menu.png", width: 25, height: 25,),
-              title: const Text("Bookmark")),
+              title: const Text("Home")
+            )
+          ),
+          GestureDetector(
+            onTap: (){
+              widget.callback(LeftMenuAction.bookmark);
+              Navigator.pop(context);
+            },
+            child: ListTile(
+                leading: Image.asset("assets/images/bookmark_menu.png", width: 25, height: 25,),
+                title: const Text("Bookmark")
+            )
+          ),
           ListTile(
             leading: Image.asset("assets/images/theme_menu.png", width: 25, height: 25,),
             title: const Text("Theme"),

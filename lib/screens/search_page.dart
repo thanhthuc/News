@@ -4,8 +4,6 @@ import 'package:news/api_client/api_client.dart';
 import 'package:news/model/news_model.dart';
 import 'package:news/small_component/news_list_view.dart';
 
-import '../small_component/row_news_view.dart';
-
 class CustomSearchDelegate extends SearchDelegate<String> {
   List<News> searchList = [];
   final APIClient _apiClient = APIClient();
