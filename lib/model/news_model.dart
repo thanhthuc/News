@@ -26,7 +26,7 @@ class News {
     required this.timestamp
   }) {
     if (kDebugMode) {
-      print("init News Model title");
+      print("init News Model content: ${this.content}");
     }
   }
 

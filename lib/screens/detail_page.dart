@@ -38,8 +38,22 @@ class DetailPageState extends State<DetailPage> {
               ]
             ),
                 FadeInImage(placeholder: const AssetImage("assets/images/news.jpg"), image: NetworkImage(widget.news.imageURL ?? "")),
-                Text(widget.news.description ?? ""),
-                Text(widget.news.content ?? "")
+                Expanded(
+                    child: SingleChildScrollView(
+                        child:
+                        Text(
+                            widget.news.description ?? "",
+                            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
+                        ),
+                    )
+                ),
+                Container(height: 20),
+                Expanded(
+                    child: SingleChildScrollView(
+                        child:
+                        Text(widget.news.content ?? "", overflow: TextOverflow.clip,)
+                    )
+                )
       ]))
     );
   }
