@@ -20,7 +20,6 @@ class MyHomePageWithProvider extends StatefulWidget {
 }
 
 class MyHomePageWithProviderState extends State<MyHomePageWithProvider> {
-
   @override
   void initState() {
     // TODO: implement initState
@@ -33,11 +32,9 @@ class MyHomePageWithProviderState extends State<MyHomePageWithProvider> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-
     if (kDebugMode) {
       print("rebuild widget provider");
     }
-
     var provider = Provider.of<NewsListProvider>(context, listen: false);
     return Scaffold(
       drawer: LeftMenu(callback: (action){
@@ -70,14 +67,10 @@ class MyHomePageWithProviderState extends State<MyHomePageWithProvider> {
                   children: [
                     PageNumberActionView(
                         prevCallback: (){
-                          int newPage = provider.currentPage - 1;
-                          provider.changeCurrentPage(newPage);
-                          provider.fetchNews(provider.currentPage, provider.sortBy);
+                          provider.preCallbackHandle();
                         },
                         nextCallback: (){
-                          int newPage = provider.currentPage + 1;
-                          provider.changeCurrentPage(newPage);
-                          provider.fetchNews(provider.currentPage, provider.sortBy);
+                          provider.nextCallbackHandle();
                         },
                         pagesNumCallback: (page){
                           provider.fetchNews(page, provider.sortBy);
