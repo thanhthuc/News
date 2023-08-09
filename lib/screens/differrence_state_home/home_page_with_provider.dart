@@ -35,7 +35,7 @@ class MyHomePageWithProviderState extends State<MyHomePageWithProvider> {
     if (kDebugMode) {
       print("rebuild widget provider");
     }
-    var provider = Provider.of<NewsListProvider>(context, listen: false);
+    NewsListProvider provider = Provider.of<NewsListProvider>(context, listen: false);
     return Scaffold(
       drawer: LeftMenu(callback: (action){
         //
