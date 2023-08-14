@@ -1,6 +1,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:news/state_management/stream/stream.dart';
 import 'package:provider/provider.dart';
 import '../../model/news_model.dart';
 import '../../small_component/news_list_view.dart';
@@ -12,17 +13,29 @@ import '../screen_menu.dart';
 import '../search_page.dart';
 import '../top_trend_page.dart';
 
-class MyHomePageWithProvider extends StatefulWidget {
-  const MyHomePageWithProvider({super.key});
+
+class MyHomePageWithStream extends StatefulWidget {
+  const MyHomePageWithStream({super.key});
   @override
-  State<StatefulWidget> createState() => MyHomePageWithProviderState();
+  State<StatefulWidget> createState() => MyHomePageWithStreamState();
 }
 
-class MyHomePageWithProviderState extends State<MyHomePageWithProvider> {
+class MyHomePageWithStreamState extends State<MyHomePageWithStream> {
+  var streamModel = NewsListStreamModel();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    streamModel.streamController?.close();
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    // fetch data from stream
+    streamModel.getList();
   }
 
   @override
@@ -42,7 +55,6 @@ class MyHomePageWithProviderState extends State<MyHomePageWithProvider> {
               context: context,
               delegate: CustomSearchDelegate()
           );
-
         }, icon: const Icon(Icons.search))],
       ),
       body:
@@ -53,48 +65,48 @@ class MyHomePageWithProviderState extends State<MyHomePageWithProvider> {
           Column(
               children: <Widget>[
                 TopMainFilterView(allNewsCallback: (){
-                  // provider.fetchAllNews();
+                  streamModel.getList();
                 }, topTrendingCallback: () {
-                  // provider.fetchTopHeading();
+                  streamModel.fetchTopHeading();
                 }),
-                // if (provider.isAllNew)
-                  Expanded(child: Column(
-                    children: [
-                      PageNumberActionView(
-                          prevCallback: (){
-                            // provider.preCallbackHandle();
-                          },
-                          nextCallback: (){
-                            // provider.nextCallbackHandle();
-                          },
-                          pagesNumCallback: (page){
-                            // provider.fetchNews(page, provider.sortBy);
-                          }),
-                      Row(children: [
-                        const Spacer(),
-                        DropdownCustom(dropdownFilterCallback: (filterState) {
-                          // provider.fetchNews(provider.currentPage, filterState);
-                        },)
-                      ]),
-                      Container(height: 20),
-                      StreamBuilder<List<News>>(builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return const Center(child: CircularProgressIndicator(),);
-                          }
-                          List<News> newsList = snapshot.data ?? [];
-                          return NewsListView(list: newsList);
-                      })
-                      // Consumer<NewsListProvider>(builder: (context, value, child) {
-                      //   if (value.isLoading) {
-                      //     return const Center(child: CircularProgressIndicator(),);
-                      //   }
-                      //   final newsList = value.listNews;
-                      //   return NewsListView(list: newsList);
-                      // })
-                    ],
-                  )),
-                // if (!provider.isAllNew)
-                //   TopTrend()
+                StreamBuilder<NewsPageState>(
+                  stream: streamModel.streamController?.stream,
+                    builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(child: CircularProgressIndicator(),);
+                  }
+                  List<News> newsList = snapshot.data?.list ?? [];
+                  if (snapshot.data?.isAllNew ?? false) {
+                    return Expanded(child: Column(
+                      children: [
+                        PageNumberActionView(
+                            prevCallback: (){
+                              streamModel.preCallbackHandle();
+                            },
+                            nextCallback: (){
+                              streamModel.nextCallbackHandle();
+                            },
+                            pagesNumCallback: (page){
+                              streamModel.fetchNews(page, streamModel.sortBy);
+                            }),
+                        Row(children: [
+                          const Spacer(),
+                          DropdownCustom(dropdownFilterCallback: (filterState) {
+                            streamModel.fetchNews(streamModel.currentPage, filterState);
+                          },)
+                        ]),
+                        Container(height: 20),
+                        NewsListView(list: newsList)
+                      ],
+                    ));
+                  }
+                  else if (!(snapshot.data?.isAllNew ?? false)) {
+                    return TopTrend();
+                  }
+                  else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                })
               ]
           )
       ),

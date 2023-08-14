@@ -1,30 +1,77 @@
 import 'dart:async';
-
 import 'package:news/api_client/api_client.dart';
-
+import 'package:news/small_component/published_dropdown_view.dart';
 import '../../model/news_model.dart';
 
 abstract class NewsListStreamImpl {
-  StreamController<List<News>> getList();
+  void getList();
 }
 
-class NewsListStream implements NewsListStreamImpl {
+abstract class NewsPageStateI {
+  late bool isAllNew;
+  late bool isLoading;
+  late List<News> list;
+}
 
-  final APIClient _apiClient = APIClient();
-
-  final StreamController<List<News>> _streamController = StreamController<List<News>>();
-
-  Future<List<News>> fetchData() async {
-    // TODO: implement fetchData
-    var list = await _apiClient.fetchNews();
-    return list;
-  }
+class NewsPageState implements NewsPageStateI {
+  @override
+  bool isAllNew = true;
 
   @override
-  StreamController<List<News>> getList() {
-    Sink sink = _streamController.sink;
-    var list = fetchData();
-    sink.add(list);
-    return _streamController;
+  bool isLoading = true;
+
+  @override
+  List<News> list = [];
+
+}
+
+class NewsListStreamModel implements NewsListStreamImpl {
+
+  final APIClient _apiClient = APIClient();
+  DropdownFilterState sortBy = DropdownFilterState.popularity;
+  int currentPage = 1;
+  NewsPageState newsPageState = NewsPageState();
+  final StreamController<NewsPageState>? streamController = StreamController<NewsPageState>();
+
+  @override
+  void getList() async {
+    var sink = streamController?.sink;
+    var list = await _apiClient.fetchNews();
+    newsPageState.isLoading = false;
+    newsPageState.list = list;
+    newsPageState.isAllNew = true;
+    sink?.add(newsPageState);
   }
+
+  void preCallbackHandle() {
+    currentPage -= 1;
+    fetchNews(currentPage, sortBy);
+  }
+
+  void nextCallbackHandle() {
+    currentPage += 1;
+    fetchNews(currentPage, sortBy);
+  }
+
+  void fetchNews(int page, DropdownFilterState sortBy) async {
+    currentPage = page;
+    this.sortBy = sortBy;
+    var newList = await _apiClient.fetchNewsWith(page * 5, sortBy);
+    newsPageState.isLoading = false;
+    newsPageState.list = newList;
+    streamController?.sink.add(newsPageState);
+  }
+
+  void fetchTopHeading() async {
+    var newList = await _apiClient.fetchTopNews();
+    newsPageState.isLoading = false;
+    newsPageState.list = newList;
+    newsPageState.isAllNew = false;
+    streamController?.sink.add(newsPageState);
+  }
+
+  // Stream<List<News>> listStream() async* {
+  //   var list = await getList();
+  //   yield list;
+  // }
 }

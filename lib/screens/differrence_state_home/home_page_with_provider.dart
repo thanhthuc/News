@@ -35,67 +35,74 @@ class MyHomePageWithProviderState extends State<MyHomePageWithProvider> {
     if (kDebugMode) {
       print("rebuild widget provider");
     }
-    NewsListProvider provider = Provider.of<NewsListProvider>(context, listen: false);
-    return Scaffold(
-      drawer: LeftMenu(callback: (action){
-        //
-      }),
-      appBar: AppBar(
-        title: const Text("Home with provider"),
-        actions: [IconButton(onPressed: () async {
-          var result = await showSearch(
-              context: context,
-              delegate: CustomSearchDelegate()
-          );
 
-        }, icon: const Icon(Icons.search))],
-      ),
-      body:
-      Container(
+    NewsListProvider provider = Provider.of<NewsListProvider>(
+        context, listen: false);
+    return Scaffold(
+        drawer: LeftMenu(callback: (action) {
+          //
+        }),
+        appBar: AppBar(
+          title: const Text("Home with provider"),
+          actions: [IconButton(onPressed: () async {
+            var result = await showSearch(
+                context: context,
+                delegate: CustomSearchDelegate()
+            );
+          }, icon: const Icon(Icons.search))
+          ],
+        ),
+        body:
+        Container(
           color: Colors.grey,
           padding: const EdgeInsets.all(20),
           child:
           Column(
-            children: <Widget>[
-              TopMainFilterView(allNewsCallback: (){
-                provider.fetchAllNews();
-              }, topTrendingCallback: () {
-                provider.fetchTopHeading();
-              }),
-              if (provider.isAllNew)
-                Expanded(child: Column(
-                  children: [
-                    PageNumberActionView(
-                        prevCallback: (){
-                          provider.preCallbackHandle();
-                        },
-                        nextCallback: (){
-                          provider.nextCallbackHandle();
-                        },
-                        pagesNumCallback: (page){
-                          provider.fetchNews(page, provider.sortBy);
-                        }),
-                    Row(children: [
-                      const Spacer(),
-                      DropdownCustom(dropdownFilterCallback: (filterState) {
-                        provider.fetchNews(provider.currentPage, filterState);
-                      },)
-                    ]),
-                    Container(height: 20),
-                    Consumer<NewsListProvider>(builder: (context, value, child) {
-                      if (value.isLoading) {
-                        return const Center(child: CircularProgressIndicator(),);
-                      }
-                      final newsList = value.listNews;
-                      return NewsListView(list: newsList);
-                    })
-                  ],
-                )),
-              if (!provider.isAllNew)
-                TopTrend()
-            ]
-          )
-      ),
+              children: <Widget>[
+                TopMainFilterView(allNewsCallback: () {
+                  provider.fetchAllNews();
+                }, topTrendingCallback: () {
+                  provider.fetchTopHeading();
+                }),
+                Consumer<NewsListProvider>(builder: (context, value, child) {
+                  if (value.isLoading) {
+                    return const Center(child: CircularProgressIndicator(),);
+                  }
+                  else if (value.isAllNew) {
+                    var newList = value.listNews;
+                    return Expanded(child: Column(
+                      children: [
+                        PageNumberActionView(
+                            prevCallback: () {
+                              provider.preCallbackHandle();
+                            },
+                            nextCallback: () {
+                              provider.nextCallbackHandle();
+                            },
+                            pagesNumCallback: (page) {
+                              provider.fetchNews(page, provider.sortBy);
+                            }),
+                        Row(children: [
+                          const Spacer(),
+                          DropdownCustom(dropdownFilterCallback: (filterState) {
+                            provider.fetchNews(
+                                provider.currentPage, filterState);
+                          },)
+                        ]),
+                        Container(height: 20),
+                        NewsListView(list: newList)
+                      ],
+                    )
+                    );
+                  }
+                  else {
+                    return TopTrend();
+                  }
+                }
+                )
+              ]
+          ),
+        )
     );
   }
 }

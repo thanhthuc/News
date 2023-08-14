@@ -10,8 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a181f92f-fad5-4003-b27a-06c8fa1fc410" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/state_management/stream/multiple_stream.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/differrence_state_home/home_page_with_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/differrence_state_home/home_page_with_provider.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/differrence_state_home/home_page_with_stream.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/differrence_state_home/home_page_with_stream.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/state_management/bloc/bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/state_management/bloc/bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/state_management/provider/provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/state_management/provider/provider.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/state_management/stream/stream.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/state_management/stream/stream.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +99,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
