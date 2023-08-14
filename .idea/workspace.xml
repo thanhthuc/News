@@ -10,14 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a181f92f-fad5-4003-b27a-06c8fa1fc410" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/state_management/stream/multiple_stream.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/differrence_state_home/home_page_with_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/differrence_state_home/home_page_with_provider.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/differrence_state_home/home_page_with_stream.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/differrence_state_home/home_page_with_stream.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/state_management/bloc/bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/state_management/bloc/bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/state_management/provider/provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/state_management/provider/provider.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/state_management/stream/stream.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/state_management/stream/stream.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/state_management/stream/multiple_stream.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/state_management/stream/multiple_stream.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/news.iml" beforeDir="false" afterPath="$PROJECT_DIR$/news.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,18 +52,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="cidr.known.project.marker" value="true" />
-    <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.General" />
-    <property name="show.migrate.to.gradle.popup" value="false" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "io.flutter.reload.alreadyRun": "true",
+    "settings.editor.selected.configurable": "flutter.settings",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lib/screens/differrence_state_home" />
