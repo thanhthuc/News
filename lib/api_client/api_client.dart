@@ -4,6 +4,11 @@
 // Multi inherited
 // https://developermemos.com/posts/dart-abstract-classes-interfaces
 
+// TODO: Add more API: https://www.kodeco.com/31973428-getting-started-with-the-bloc-pattern#toc-anchor-001
+// TODO: use this api: https://github.com/MohamadSobhy/News-App-Hacker-News-Api---Flutter-
+// TODO: https://github.com/HackerNews/API
+// TODO:Add a page with github trend
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -29,8 +34,6 @@ abstract class Parse<T> {
 class ParseNews implements Parse {
   @override
   List<News> parseObjectFrom(String jsonResponseBody) {
-    // TODO: implement parseObjectFrom
-
     var parsedObjectParent = jsonDecode(jsonResponseBody).cast<String, dynamic>();
     if(kDebugMode) {
       print("parsed: $parsedObjectParent");
