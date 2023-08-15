@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:news/screens/differrence_state_home/home_page_with_bloc.dart';
 import 'package:news/screens/differrence_state_home/home_page_with_provider.dart';
 import 'package:news/screens/differrence_state_home/home_page_with_setState.dart';
 import 'package:news/screens/differrence_state_home/home_page_with_stream.dart';
@@ -28,10 +29,16 @@ class MyApp extends StatelessWidget {
     //   home: const MyHomePage(title: 'News'),
     // );
 
+    // return MaterialApp(
+    //   title: "News",
+    //   theme: ThemeData(primarySwatch: Colors.yellow),
+    //   home: const MyHomePageWithStream(),
+    // );
+
     return MaterialApp(
       title: "News",
       theme: ThemeData(primarySwatch: Colors.yellow),
-      home: const MyHomePageWithStream(),
+      home: const MyHomePageWithBloc(),
     );
 
     // return MultiProvider(providers: [
