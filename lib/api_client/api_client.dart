@@ -46,7 +46,6 @@ class ParseNews implements Parse {
 class ParseNewObject implements Parse {
   @override
   List<NewsListObject> parseObjectFrom(String jsonResponseBody) {
-    // TODO: implement parseObjectFrom
     var parsed = jsonDecode(jsonResponseBody);
     if (kDebugMode) {
       print("parsed: $parsed");

@@ -1,0 +1,1 @@
+// this provider base on inherited widgetimport 'package:flutter/material.dart';class NewsBlocProvider extends InheritedWidget {  const NewsBlocProvider({super.key, required super.child});  @override  bool updateShouldNotify(covariant InheritedWidget oldWidget) {    // TODO: implement updateShouldNotify    throw UnimplementedError();  }}
