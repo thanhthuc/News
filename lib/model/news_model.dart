@@ -1,5 +1,4 @@
 
-import 'package:http/http.dart';
 import 'package:flutter/foundation.dart';
 
 // News api key: 8ccb67aaefd4475ba20a6bb2ef79a35d
