@@ -37,7 +37,6 @@ class MyApp extends StatelessWidget {
     //   theme: ThemeData(primarySwatch: Colors.yellow),
     //   home: const MyHomePageWithStream(),
     // );
-    Bloc bloc = NewsBlocProvider.of(context);
     return
     //   MaterialApp(
     //     title: "News",
