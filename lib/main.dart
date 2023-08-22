@@ -4,6 +4,9 @@ import 'package:news/screens/differrence_state_home/home_page_with_bloc.dart';
 import 'package:news/screens/differrence_state_home/home_page_with_provider.dart';
 import 'package:news/screens/differrence_state_home/home_page_with_setState.dart';
 import 'package:news/screens/differrence_state_home/home_page_with_stream.dart';
+import 'package:news/state_management/bloc_home_news_list/news_home_bloc.dart';
+import 'package:news/state_management/bloc_home_news_list/news_home_bloc_provider_inheritedWidget.dart';
+import 'package:news/state_management/bloc_home_news_list/news_home_bloc_provider_statefulWidget.dart';
 import 'package:news/state_management/provider/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -34,12 +37,21 @@ class MyApp extends StatelessWidget {
     //   theme: ThemeData(primarySwatch: Colors.yellow),
     //   home: const MyHomePageWithStream(),
     // );
-
-    return MaterialApp(
-      title: "News",
-      theme: ThemeData(primarySwatch: Colors.yellow),
-      home: const MyHomePageWithBloc(),
-    );
+    Bloc bloc = NewsBlocProvider.of(context);
+    return
+    //   MaterialApp(
+    //     title: "News",
+    //     theme: ThemeData(primarySwatch: Colors.yellow),
+    //     home: const MyHomePageWithBloc(),
+    // );
+      NewsBlocProvider(
+        bloc: ListNewsBloc(),
+        child:
+          MaterialApp(
+            title: "News",
+            theme: ThemeData(primarySwatch: Colors.yellow),
+            home: const MyHomePageWithBloc(),
+        ));
 
     // return MultiProvider(providers: [
     //     ChangeNotifierProvider(create: (context) {
