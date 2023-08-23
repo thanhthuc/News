@@ -36,7 +36,7 @@ class MyHomePageWithGetXState extends State<MyHomePageWithGetX> {
     if (kDebugMode) {
       print("rebuild widget getX");
     }
-    var newsLisController = ListNewsController();
+    var newsLisController = Get.put(ListNewsController());
     return
       DefaultTabController(
           initialIndex: 0,
@@ -69,15 +69,9 @@ class MyHomePageWithGetXState extends State<MyHomePageWithGetX> {
                         // Do nothing
                       },
                       tabs: const [
-                        Tab(
-                            child: Text("Tech News")
-                        ),
-                        Tab(
-                            child: Text("Top News")
-                        ),
-                        Tab(
-                            child: Text("All news")
-                        )
+                        Tab( child: Text("Tech News")),
+                        Tab(child: Text("Top News")),
+                        Tab(child: Text("All news"))
                       ])
               ),
               body:
@@ -91,18 +85,18 @@ class MyHomePageWithGetXState extends State<MyHomePageWithGetX> {
                         children: [
                           PageNumberActionView(
                               prevCallback: (){
-                                bloc.toPreviousPage();
+                                newsLisController.toPreviousPage();
                               },
                               nextCallback: (){
-                                bloc.toNextPage();
+                                newsLisController.toNextPage();
                               },
                               pagesNumCallback: (page){
-                                bloc.fetchTechListNewsByPage(page);
+                                newsLisController.fetchTechListNewsByPage(page);
                               }),
                           Row(children: [
                             const Spacer(),
                             DropdownCustom(dropdownFilterCallback: (filterState) {
-                              bloc.fetchTechListNewsBySortBy(filterState);
+                              newsLisController.fetchTechListNewsBySortBy(filterState);
                             },)
                           ]),
                           techListNews(context),
@@ -118,73 +112,69 @@ class MyHomePageWithGetXState extends State<MyHomePageWithGetX> {
   }
 
   Widget topListNews(BuildContext context) {
-    // final ListNewsBloc bloc = NewsBlocProvider.of(context);
-    // bloc.fetchTopListNews();
+    ListNewsController c = Get.find<ListNewsController>();
+    c.getTopNews();
     return
       Container(
         padding: const EdgeInsets.all(20),
         color: Colors.grey,
-        child: StreamBuilder<List<News>>(
-            stream: bloc.topListNewsStream.stream,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return const Center(child: Text("There are something wrong"));
-              }
-              if (snapshot.hasData) {
-                var list = snapshot.data ?? [];
-                return NewsListView(list: list);
-              }
-              else {
-                return const CircularProgressIndicator();
-              }
-            }),
-      );
-  }
-
-  Widget techListNews(BuildContext context) {
-    // final ListNewsBloc bloc = NewsBlocProvider.of(context);
-    // bloc.fetchTechListNews();
-    return
-      Expanded(child: StreamBuilder<List<News>>(
-          stream: bloc.listTechNewsStream.stream,
-          builder: (context, snapshot) {
-            if (kDebugMode) {
-              print("call stream builder again");
-            }
-            if (snapshot.hasError) {
+        child:
+          Obx(() {
+            if (c.listTopNews.isEmpty) {
               return const Center(child: Text("There are something wrong"));
             }
-            if (snapshot.hasData) {
-              var list = snapshot.data ?? [];
+            if (c.listTopNews.isNotEmpty) {
+              var list = c.listTopNews;
               return NewsListView(list: list);
             }
             else {
               return const CircularProgressIndicator();
             }
-          }));
+          })
+      );
+  }
+
+  Widget techListNews(BuildContext context) {
+    ListNewsController c = Get.find<ListNewsController>();
+    c.getTechNews();
+    return
+      Expanded(child:
+        Obx(() {
+          if (c.listTechNews.isEmpty) {
+            return const Center(child: Text("There are something wrong"));
+          }
+          if (c.listTechNews.isNotEmpty) {
+            var list = c.listTechNews;
+            return NewsListView(list: list);
+          }
+          else {
+            return const CircularProgressIndicator();
+          }
+        })
+      );
   }
 
   Widget allNews(BuildContext context) {
     // final ListNewsBloc bloc = NewsBlocProvider.of(context);
     // bloc.fetchAllListNews();
+    ListNewsController c = Get.find<ListNewsController>();
+    c.getAllNews();
     return
       Container(
         padding: const EdgeInsets.all(20),
         color: Colors.grey,
-        child: StreamBuilder<List<News>>(
-            stream: bloc.allListNewsStream.stream,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return const Center(child: Text("There are something wrong"));
-              }
-              if (snapshot.hasData) {
-                var list = snapshot.data ?? [];
-                return NewsListView(list: list);
-              }
-              else {
-                return const CircularProgressIndicator();
-              }
-            }),
+        child: Obx(() {
+          if (c.listAllNews.isEmpty) {
+            return const Center(child: Text("There are something wrong"));
+          }
+          if (c.listAllNews.isNotEmpty) {
+            var list = c.listAllNews;
+            return NewsListView(list: list);
+          }
+          else {
+            return const CircularProgressIndicator();
+          }
+        }),
       );
   }
 }

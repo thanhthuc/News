@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:news/screens/differrence_state_home/home_page_with_bloc.dart';
+import 'package:news/screens/differrence_state_home/home_page_with_getx.dart';
 import 'package:news/screens/differrence_state_home/home_page_with_provider.dart';
 import 'package:news/screens/differrence_state_home/home_page_with_setState.dart';
 import 'package:news/screens/differrence_state_home/home_page_with_stream.dart';
@@ -42,15 +44,22 @@ class MyApp extends StatelessWidget {
     //     title: "News",
     //     theme: ThemeData(primarySwatch: Colors.yellow),
     //     home: const MyHomePageWithBloc(),
-    // );
-      NewsBlocProvider(
-        bloc: ListNewsBloc(),
-        child:
-          MaterialApp(
-            title: "News",
-            theme: ThemeData(primarySwatch: Colors.yellow),
-            home: const MyHomePageWithBloc(),
-        ));
+    // );'
+
+      // NewsBlocProvider(
+      //   bloc: ListNewsBloc(),
+      //   child:
+      //     MaterialApp(
+      //       title: "News",
+      //       theme: ThemeData(primarySwatch: Colors.yellow),
+      //       home: const MyHomePageWithBloc(),
+      //   ));
+
+     GetMaterialApp(
+      title: "News",
+      theme: ThemeData(primarySwatch: Colors.yellow),
+      home: const MyHomePageWithGetX(),
+    );
 
     // return MultiProvider(providers: [
     //     ChangeNotifierProvider(create: (context) {
