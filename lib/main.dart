@@ -46,20 +46,20 @@ class MyApp extends StatelessWidget {
     //     home: const MyHomePageWithBloc(),
     // );'
 
-      // NewsBlocProvider(
-      //   bloc: ListNewsBloc(),
-      //   child:
-      //     MaterialApp(
-      //       title: "News",
-      //       theme: ThemeData(primarySwatch: Colors.yellow),
-      //       home: const MyHomePageWithBloc(),
-      //   ));
+      NewsBlocProvider(
+        bloc: ListNewsBloc(),
+        child:
+          MaterialApp(
+            title: "News",
+            theme: ThemeData(primarySwatch: Colors.yellow),
+            home: const MyHomePageWithBloc(),
+        ));
 
-     GetMaterialApp(
-      title: "News",
-      theme: ThemeData(primarySwatch: Colors.yellow),
-      home: const MyHomePageWithGetX(),
-    );
+    //  GetMaterialApp(
+    //   title: "News",
+    //   theme: ThemeData(primarySwatch: Colors.yellow),
+    //   home: const MyHomePageWithGetX(),
+    // );
 
     // return MultiProvider(providers: [
     //     ChangeNotifierProvider(create: (context) {
