@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../model/news_model.dart';
+import '../../model/news_model.dart';
 
 class DetailPage extends StatefulWidget {
   final News news;

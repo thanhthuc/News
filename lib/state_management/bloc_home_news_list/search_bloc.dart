@@ -5,5 +5,4 @@ class SearchBloc {
 
   StreamController<String> query = StreamController();
 
-  
 }

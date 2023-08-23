@@ -21,10 +21,13 @@ abstract class BaseAPI {
   String get baseURL;
   String get apiKey;
   late Map<String, dynamic> parameters;
-  Future<List<News>> fetchNews();
+  Future<List<News>> fetchTechNews();
   Future<List<News>> fetchNewsWith(int pageSize, DropdownFilterState sortBy);
   Future<List<News>> fetchTopNews();
+  Future<List<News>> fetchAllNews();
   Future<List<News>> fetchNewsWithParameter(Map<String, dynamic> parameters);
+  Future<List<News>> searchNews(String query);
+
 }
 
 abstract class Parse<T> {
@@ -64,15 +67,18 @@ class APIClient implements BaseAPI {
   String apiKey = "7a54e7a933484afd9b32f60e79db993e";
   // GET https://newsapi.org/v2/everything?q=Apple&from=2023-08-03&sortBy=popularity&apiKey=API_KEY
   // String get baseURL => "https://newsapi.org/v2/everything?q=Apple&from=2023-08-03&sortBy=popularity&apiKey=$apiKey";
-
+  // https://newsapi.org/v2/everything?domains=wsj.com&apiKey=8ccb67aaefd4475ba20a6bb2ef79a35d
   @override
   // TODO: implement parameters
   Map<String, dynamic> get parameters {
+    /*
+    domains=wsj.com
+     */
     var queryParameter = {
-      "q":"Apple",
+      "q":"technical",
       // "from":2023-08-05,
       "pageSize":"5",
-      "sortBy":"popularity",
+      // "sortBy":"popularity",
       "apiKey":apiKey
     };
     return queryParameter;
@@ -88,7 +94,7 @@ class APIClient implements BaseAPI {
   String get baseURL => 'newsapi.org';
 
   @override
-  Future<List<News>> fetchNews() async {
+  Future<List<News>> fetchTechNews() async {
     Uri uri = Uri.https(baseURL, "/v2/everything", parameters);
     final response = await _client.get(uri, headers: {
       HttpHeaders.contentTypeHeader: "application/json",
@@ -115,7 +121,8 @@ class APIClient implements BaseAPI {
   @override
   Future<List<News>> fetchNewsWith(int pageSize, DropdownFilterState sortBy) async {
     Map<String, dynamic> parameters = {
-      "q": "Apple",
+      // "domains":"wsj.com",
+      "q":"technical",
       // "from":2023-08-05,
       "pageSize": "$pageSize",
       "sortBy": sortBy.name,
@@ -135,8 +142,49 @@ class APIClient implements BaseAPI {
   }
 
   @override
+  Future<List<News>> searchNews(String query) async {
+    Map<String, dynamic> parameters = {
+      "q":query,
+      "pageSize": "20",
+      "sortBy": "popularity",
+      "apiKey": apiKey
+    };
+
+    Uri uri = Uri.https(baseURL, "/v2/everything", parameters);
+    final response = await _client.get(uri, headers: {
+      HttpHeaders.contentTypeHeader: "application/json",
+    });
+
+    var parseNewsFunc = ParseNews().parseObjectFrom;
+    return compute(parseNewsFunc, response.body);
+  }
+
+  @override
+  Future<List<News>> fetchAllNews() async {
+    var queryParameter = {
+      //wsj.com,reuters.com
+      "domains":"wsj.com",
+      // "q":"technical",
+      // "from":2023-08-05,
+      // "pageSize":"5",
+      // "sortBy":"popularity",
+      "apiKey":apiKey
+    };
+
+    Uri uri = Uri.https(baseURL, "/v2/everything", queryParameter);
+    final response = await _client.get(uri, headers: {
+      HttpHeaders.contentTypeHeader: "application/json",
+    });
+    // List<News> list = parseNewsFrom(response.body); => app freeze for a moment
+    // Use compute to isolate to background thread
+    var parseNewsFunc = ParseNews().parseObjectFrom;
+    return compute(parseNewsFunc, response.body);
+
+  }
+
+  @override
   Future<List<News>> fetchTopNews() async {
-    // TODO: implement fetchTopNews
+
     Map<String, dynamic> parameters = {
       // "q": "Apple",
       // "from":2023-08-05,

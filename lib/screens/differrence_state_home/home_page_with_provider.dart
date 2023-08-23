@@ -9,9 +9,9 @@ import '../../small_component/page_number_action_view.dart';
 import '../../small_component/published_dropdown_view.dart';
 import '../../small_component/top_main_filter_view.dart';
 import '../../state_management/provider/provider.dart';
-import '../screen_menu.dart';
-import '../search_page.dart';
-import '../top_trend_page.dart';
+import '../other_pages/screen_menu.dart';
+import '../search_page/search_page_with_delegate.dart';
+import '../other_pages/top_trend_page.dart';
 
 class MyHomePageWithProvider extends StatefulWidget {
   const MyHomePageWithProvider({super.key});

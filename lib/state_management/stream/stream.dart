@@ -36,7 +36,7 @@ class NewsListStreamModel implements NewsListStreamImpl {
   @override
   void getList() async {
     var sink = streamController?.sink;
-    var list = await _apiClient.fetchNews();
+    var list = await _apiClient.fetchTechNews();
     newsPageState.isLoading = false;
     newsPageState.list = list;
     newsPageState.isAllNew = true;
