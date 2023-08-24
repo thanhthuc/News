@@ -3,13 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news/state_management/getx/list_news_get_x.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:news/state_management/bloc_home_news_list/news_home_bloc_provider_statefulWidget.dart';
-import '../../model/news_model.dart';
 import '../../small_component/news_list_view.dart';
 import '../../small_component/page_number_action_view.dart';
 import '../../small_component/published_dropdown_view.dart';
-import '../../state_management/bloc_home_news_list/news_home_bloc.dart';
 import '../other_pages/screen_menu.dart';
 import '../search_page/search_page_with_delegate.dart';
 
@@ -69,7 +65,7 @@ class MyHomePageWithGetXState extends State<MyHomePageWithGetX> {
                         // Do nothing
                       },
                       tabs: const [
-                        Tab( child: Text("Tech News")),
+                        Tab(child: Text("Tech News")),
                         Tab(child: Text("Top News")),
                         Tab(child: Text("All news"))
                       ])

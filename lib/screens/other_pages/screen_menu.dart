@@ -39,7 +39,7 @@ class LeftMenuState extends State<LeftMenu> {
           GestureDetector(
             onTap: (){
               widget.callback(LeftMenuAction.home);
-              Navigator.pop(context);
+              // Navigator.pop(context);
             },
             child: ListTile(
               leading: Image.asset("assets/images/home_menu.png", width: 25, height: 25,),

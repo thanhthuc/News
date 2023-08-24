@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'news_home_bloc.dart';
+import '../bloc_home_news_list/news_home_bloc.dart';
 
 class SearchBlocProvider<T extends Bloc> extends StatefulWidget {
   final Widget child;

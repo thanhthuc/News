@@ -1,10 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:news/small_component/news_list_view.dart';
-import 'package:news/state_management/bloc_home_news_list/search_bloc.dart';
-import 'package:news/state_management/bloc_home_news_list/search_bloc_provider.dart';
-
+import 'package:news/state_management/bloc_search/search_bloc.dart';
 import '../../model/news_model.dart';
+import '../../state_management/bloc_search/search_bloc_provider.dart';
 
 class SearchPageResult extends StatefulWidget {
   const SearchPageResult({super.key});

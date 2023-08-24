@@ -5,7 +5,7 @@ import 'package:rxdart/rxdart.dart';
 
 import '../../api_client/api_client.dart';
 import '../../model/news_model.dart';
-import 'news_home_bloc.dart';
+import '../bloc_home_news_list/news_home_bloc.dart';
 
 class SearchBloc implements Bloc {
 
