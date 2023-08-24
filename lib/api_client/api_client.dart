@@ -56,7 +56,6 @@ class ParseNewObject implements Parse {
     return parsed.map<NewsListObject>((json) => NewsListObject.fromJson(json)).toList();
   }
 }
-
 class APIClient implements BaseAPI {
   // What is isolate?
   final Client _client = Client();
@@ -64,7 +63,7 @@ class APIClient implements BaseAPI {
   // 7a54e7a933484afd9b32f60e79db993e: test
   // 8ccb67aaefd4475ba20a6bb2ef79a35d: dev
   @override
-  String apiKey = "7a54e7a933484afd9b32f60e79db993e";
+  String apiKey = "8ccb67aaefd4475ba20a6bb2ef79a35d";
   // GET https://newsapi.org/v2/everything?q=Apple&from=2023-08-03&sortBy=popularity&apiKey=API_KEY
   // String get baseURL => "https://newsapi.org/v2/everything?q=Apple&from=2023-08-03&sortBy=popularity&apiKey=$apiKey";
   // https://newsapi.org/v2/everything?domains=wsj.com&apiKey=8ccb67aaefd4475ba20a6bb2ef79a35d
