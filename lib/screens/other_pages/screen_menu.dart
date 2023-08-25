@@ -1,7 +1,11 @@
 
 
 // This is stateful widget
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news/screens/bookmark/bookmark_page.dart';
+import 'package:news/screens/search_page/search_page_rxdart.dart';
+import 'package:news/state_management/bloc_search/search_bloc_provider.dart';
 
 enum LeftMenuAction {
   home,
@@ -39,17 +43,28 @@ class LeftMenuState extends State<LeftMenu> {
           GestureDetector(
             onTap: (){
               widget.callback(LeftMenuAction.home);
-              // Navigator.pop(context);
+              // Navigator.of(context).pop();
+              Navigator.of(context).push(
+                CupertinoPageRoute(
+                  fullscreenDialog: false,
+                  builder: (context) => const BookmarkPage(),
+                ),
+              );
             },
             child: ListTile(
               leading: Image.asset("assets/images/home_menu.png", width: 25, height: 25,),
-              title: const Text("Home")
+              title: const Text("Account")
             )
           ),
           GestureDetector(
             onTap: (){
               widget.callback(LeftMenuAction.bookmark);
-              Navigator.pop(context);
+              Navigator.of(context).push(
+                CupertinoPageRoute(
+                  fullscreenDialog: false,
+                  builder: (context) => const BookmarkPage(),
+                ),
+              );
             },
             child: ListTile(
                 leading: Image.asset("assets/images/bookmark_menu.png", width: 25, height: 25,),

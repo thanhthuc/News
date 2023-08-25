@@ -38,9 +38,9 @@ class ParseNews implements Parse {
   @override
   List<News> parseObjectFrom(String jsonResponseBody) {
     var parsedObjectParent = jsonDecode(jsonResponseBody).cast<String, dynamic>();
-    if(kDebugMode) {
-      print("parsed: $parsedObjectParent");
-    }
+    // if(kDebugMode) {
+    //   print("parsed: $parsedObjectParent");
+    // }
     var listNews = parsedObjectParent["articles"];
     return listNews.map<News>((json) => News.fromJson(json)).toList();
   }

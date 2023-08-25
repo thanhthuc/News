@@ -51,7 +51,8 @@ class MyApp extends StatelessWidget {
         child:
           MaterialApp(
             title: "News",
-            theme: ThemeData(primarySwatch: Colors.yellow),
+            // grey is beauty, take note
+            theme: ThemeData(primarySwatch: Colors.indigo),
             home: const MyHomePageWithBloc(),
         ));
 
