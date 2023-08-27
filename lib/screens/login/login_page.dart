@@ -1,6 +1,9 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:news/state_management/bloc_login/login_bloc.dart';
+import 'package:news/state_management/bloc_login/login_bloc_provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,6 +15,7 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    LoginBloc loginBloc = LoginBlocProvider.of(context);
     return Scaffold(
       appBar: AppBar(
           leading: IconButton(
@@ -30,7 +34,7 @@ class LoginPageState extends State<LoginPage> {
                 child: const Text(
                   'Bookmark',
                   style: TextStyle(
-                      color: Colors.indigo,
+                      color: Colors.amber,
                       fontWeight: FontWeight.w500,
                       fontSize: 30),
                 )),
@@ -41,28 +45,56 @@ class LoginPageState extends State<LoginPage> {
                   'Sign in',
                   style: TextStyle(fontSize: 20),
                 )),
-          Container(
-          padding: const EdgeInsets.all(10),
-          child:
-            const TextField(
-              // controller: nameController,
-              decoration: InputDecoration(
+            Container(
+              padding: const EdgeInsets.all(10),
+              child:
+               TextField(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'User Name',
               ),
+              onChanged: loginBloc.usernameChange.add,
             ),
-      ),
-            Container(
-              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+          )
+            ,
+          Container(
+              padding: const EdgeInsets.fromLTRB(20, 2, 20, 10),
               child:
-                const TextField(
+              StreamBuilder<String?>(
+                  stream: loginBloc.username,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
+                    }
+                    return Container();
+                  }
+              )
+          )
+            ,
+            Container(
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child:
+              TextField(
                 obscureText: true,
-                // controller: passwordController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Password',
                 ),
+                onChanged: loginBloc.passwordChange.add,
               ),
+            ),
+            Container(
+                padding: const EdgeInsets.fromLTRB(20, 2, 20, 5),
+                child:
+                StreamBuilder<String?>(
+                  stream: loginBloc.password,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
+                    }
+                    return Container();
+                  }
+                )
             ),
             TextButton(
               onPressed: () {
@@ -73,15 +105,22 @@ class LoginPageState extends State<LoginPage> {
             Container(
                 height: 50,
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: ElevatedButton(
-                  child: const Text('Login'),
-                  onPressed: () {
-                    // print(nameController.text);
-                    // print(passwordController.text);
-                  },
-                )
+                child:
+                StreamBuilder<bool>(
+                    stream: loginBloc.isValidToSubmit,
+                    builder: (context, snapshot) {
+                  return ElevatedButton(
+                      onPressed: snapshot.data == false ? null : () {
+                        if (kDebugMode) {
+                          print("true");
+                        }
+                      },
+                      child: const Text('Login')
+                  );
+                })
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 const Text('Does not have account?'),
                 TextButton(
@@ -94,7 +133,6 @@ class LoginPageState extends State<LoginPage> {
                   },
                 )
               ],
-              mainAxisAlignment: MainAxisAlignment.center,
             ),
       ])
     ));

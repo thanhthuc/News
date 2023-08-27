@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:news/small_component/news_list_view.dart';
 import 'package:news/state_management/bloc_home_news_list/news_home_bloc.dart';
 import 'package:news/state_management/bloc_home_news_list/news_home_bloc_provider_statefulWidget.dart';
+import 'package:news/state_management/bloc_login/login_bloc.dart';
+import 'package:news/state_management/bloc_login/login_bloc_provider.dart';
 import 'package:news/state_management/bloc_search/search_bloc.dart';
 import '../../model/news_model.dart';
 import '../../state_management/bloc_search/search_bloc_provider.dart';
@@ -41,7 +43,10 @@ class BookmarkPageState extends State<BookmarkPage> {
                       child: const Text("Login"), onPressed: (){
                       Navigator.of(context).push(CupertinoPageRoute(
                         fullscreenDialog: true,
-                        builder: (context) => const LoginPage(),
+                        builder: (context) => LoginBlocProvider(
+                            bloc: LoginBloc(),
+                            child: const LoginPage()
+                        ),
                       ));
                   })
               )

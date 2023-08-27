@@ -1,26 +1,26 @@
+import 'package:flutter/cupertino.dart';
 
-import 'package:flutter/material.dart';
 import '../bloc_home_news_list/news_home_bloc.dart';
 
-class SearchBlocProvider<T extends Bloc> extends StatefulWidget {
+class LoginBlocProvider<T extends Bloc> extends StatefulWidget {
   final Widget child;
   final T bloc;
-  const SearchBlocProvider({
+  const LoginBlocProvider({
     super.key,
     required this.bloc,
     required this.child
   });
 
   static T of<T extends Bloc>(BuildContext context) {
-    final SearchBlocProvider<T> provider = context.findAncestorWidgetOfExactType()!;
+    final LoginBlocProvider<T> provider = context.findAncestorWidgetOfExactType()!;
     return provider.bloc;
   }
 
   @override
-  State<StatefulWidget> createState() => SearchBlocProviderState();
+  State<StatefulWidget> createState() => LoginBlocProviderState();
 }
 
-class SearchBlocProviderState extends State<SearchBlocProvider> {
+class LoginBlocProviderState extends State<LoginBlocProvider> {
   @override
   Widget build(BuildContext context) => widget.child;
 

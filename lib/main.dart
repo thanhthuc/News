@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
           MaterialApp(
             title: "News",
             // grey is beauty, take note
-            theme: ThemeData(primarySwatch: Colors.indigo),
+            theme: ThemeData(primarySwatch: Colors.amber),
             home: const MyHomePageWithBloc(),
         ));
 

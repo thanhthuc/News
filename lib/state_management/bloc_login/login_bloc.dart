@@ -1,38 +1,68 @@
 
 import 'dart:async';
-
+import 'dart:ffi';
+import 'package:flutter/foundation.dart';
+import 'package:news/state_management/bloc_home_news_list/news_home_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-class LoginBloc {
+class LoginBloc implements Bloc {
 
-  final StreamController<String?> _username = PublishSubject();
-  final StreamController<String?> _password = PublishSubject();
-  final StreamController<bool> _isValid = BehaviorSubject();
+  // MARK: - Private properties
+  final _username = BehaviorSubject.seeded('@');
+  final _password = BehaviorSubject.seeded('');
+  Stream<bool> get isValidToSubmit => Rx.combineLatest2(_username.stream, _password.stream, (u, p) {
+    if (u.contains("@") && p.length > 3) {
+      return true;
+    } else {
+      return false;
+    }
+  });
 
-  Stream<String?> get usernameSink => _username.stream;
-  Stream<String?> get passwordSink => _password.stream;
-  late Stream<String?> validateStringStream;
-  late Stream<bool> isValidAccount;
+  // get stream
+  Stream<String> get username => _username.stream.transform(_validateEmail);
+  Stream<String> get password => _password.stream.transform(_validatePassword);
+
+  // get sink: sink to listen event
+  Sink<String> get usernameChange => _username.sink;
+  Sink<String> get passwordChange => _password.sink;
+
+  final _validateEmail = StreamTransformer<String, String>.fromHandlers(handleData: (data, eventSink) {
+    if (data!.contains("@")) {
+      eventSink.add(data);
+    } else {
+      eventSink.addError("Not valid username format");
+    }
+  });
+
+  final _validatePassword = StreamTransformer<String, String>.fromHandlers(handleData: (data, eventSink) {
+    if (data!.length > 3) {
+      eventSink.add(data);
+    } else {
+      eventSink.addError("Not valid password length");
+    }
+  });
 
   LoginBloc() {
-    isValidAccount = _isValid.stream;
-    validateStringStream = CombineLatestStream
-        .combine2(
-        _username.stream.where((event) => (event != null)),
-        _password.stream.where((event) => (event != null)),
-            (userName, passWord) {
-          if (userName!.length < 3) {
-            _isValid.add(false);
-            return "username not valid";
-          }
-          if (passWord!.length < 3) {
-            _isValid.add(false);
-            return "password not valid";
-          }
-          _isValid.add(true);
-    });
+    print("init");
+    // isValidToSubmit =
   }
 
   void login() {
+    // call api login
+    var username = _username.value;
+    var password = _password.value;
+    // call api
+  }
+
+  void register() {
+    // call api register
+    var username = _username.value;
+    var password = _password.value;
+  }
+
+  @override
+  void dispose() {
+    _username.close();
+    _password.close();
   }
 }
