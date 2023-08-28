@@ -2,8 +2,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:news/screens/differrence_state_home/home_page_with_bloc.dart';
+import 'package:news/state_management/bloc_home_news_list/news_home_bloc.dart';
 import 'package:news/state_management/bloc_login/login_bloc.dart';
 import 'package:news/state_management/bloc_login/login_bloc_provider.dart';
+
+import '../../state_management/bloc_home_news_list/news_home_bloc_provider_statefulWidget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,11 +22,11 @@ class LoginPageState extends State<LoginPage> {
     LoginBloc loginBloc = LoginBlocProvider.of(context);
     return Scaffold(
       appBar: AppBar(
-          leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
-              onPressed: (){
-                Navigator.of(context).pop();
-              }),
+          // leading: IconButton(
+          //     icon: const Icon(Icons.arrow_back_ios),
+          //     onPressed: (){
+          //       Navigator.of(context).pop();
+          //     }),
           title: const Text('Login')
       ),
       body: Padding(
@@ -103,6 +107,34 @@ class LoginPageState extends State<LoginPage> {
               child: const Text('Forgot Password',),
             ),
             Container(
+              padding: const EdgeInsets.all(10),
+              child: StreamBuilder<bool>(
+                stream: loginBloc.isShowProgress,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    if (snapshot.data == false) {
+
+                      WidgetsBinding.instance.addPostFrameCallback((_){
+                        // Add Your Code here.
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NewsBlocProvider(
+                                    bloc: ListNewsBloc(),
+                                    child: const MyHomePageWithBloc()
+                                )
+                            )
+                        );
+                      });
+                      return Container();
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  }
+                  return Container();
+                }),
+            ),
+            Container(
                 height: 50,
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child:
@@ -111,9 +143,7 @@ class LoginPageState extends State<LoginPage> {
                     builder: (context, snapshot) {
                   return ElevatedButton(
                       onPressed: snapshot.data == false ? null : () {
-                        if (kDebugMode) {
-                          print("true");
-                        }
+                        loginBloc.login();
                       },
                       child: const Text('Login')
                   );

@@ -4,6 +4,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:news/screens/bookmark/bookmark_page.dart';
+import 'package:news/screens/login/account_page.dart';
 import 'package:news/screens/search_page/search_page_rxdart.dart';
 import 'package:news/state_management/bloc_search/search_bloc_provider.dart';
 
@@ -47,7 +48,7 @@ class LeftMenuState extends State<LeftMenu> {
               Navigator.of(context).push(
                 CupertinoPageRoute(
                   fullscreenDialog: false,
-                  builder: (context) => const BookmarkPage(),
+                  builder: (context) => const AccountPage(),
                 ),
               );
             },

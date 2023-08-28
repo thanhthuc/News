@@ -6,9 +6,12 @@ import 'package:news/screens/differrence_state_home/home_page_with_getx.dart';
 import 'package:news/screens/differrence_state_home/home_page_with_provider.dart';
 import 'package:news/screens/differrence_state_home/home_page_with_setState.dart';
 import 'package:news/screens/differrence_state_home/home_page_with_stream.dart';
+import 'package:news/screens/login/login_page.dart';
 import 'package:news/state_management/bloc_home_news_list/news_home_bloc.dart';
 import 'package:news/state_management/bloc_home_news_list/news_home_bloc_provider_inheritedWidget.dart';
 import 'package:news/state_management/bloc_home_news_list/news_home_bloc_provider_statefulWidget.dart';
+import 'package:news/state_management/bloc_login/login_bloc.dart';
+import 'package:news/state_management/bloc_login/login_bloc_provider.dart';
 import 'package:news/state_management/provider/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -44,17 +47,17 @@ class MyApp extends StatelessWidget {
     //     title: "News",
     //     theme: ThemeData(primarySwatch: Colors.yellow),
     //     home: const MyHomePageWithBloc(),
-    // );'
+    // );
 
-      NewsBlocProvider(
-        bloc: ListNewsBloc(),
-        child:
-          MaterialApp(
-            title: "News",
-            // grey is beauty, take note
-            theme: ThemeData(primarySwatch: Colors.amber),
-            home: const MyHomePageWithBloc(),
-        ));
+      MaterialApp(
+        title: "News",
+        // grey is beauty, take note
+        theme: ThemeData(primarySwatch: Colors.amber),
+        home: LoginBlocProvider(
+            bloc: LoginBloc(),
+            child: const LoginPage()
+        ),
+      );
 
     //  GetMaterialApp(
     //   title: "News",

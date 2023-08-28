@@ -37,18 +37,20 @@ class BookmarkPageState extends State<BookmarkPage> {
           child: NewsBlocProvider(
               bloc: ListNewsBloc(),
               child:
-              Center(
-                  child: CupertinoButton(
-                    color: Colors.amber,
-                      child: const Text("Login"), onPressed: (){
-                      Navigator.of(context).push(CupertinoPageRoute(
-                        fullscreenDialog: true,
-                        builder: (context) => LoginBlocProvider(
-                            bloc: LoginBloc(),
-                            child: const LoginPage()
-                        ),
-                      ));
-                  })
+              const Center(
+                  child: Text("Bookmarks"),
+                  // child: CupertinoButton(
+                  //   color: Colors.amber,
+                  //     child: const Text("Login"), onPressed: (){
+                  //     Navigator.of(context).push(CupertinoPageRoute(
+                  //       fullscreenDialog: true,
+                  //       builder: (context) => LoginBlocProvider(
+                  //           bloc: LoginBloc(),
+                  //           child: const LoginPage()
+                  //       ),
+                  //     ));
+                  // }
+                  // )
               )
           )
       ),
