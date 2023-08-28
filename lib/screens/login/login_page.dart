@@ -16,10 +16,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     LoginBloc loginBloc = LoginBlocProvider.of(context);
+
     return Scaffold(
       appBar: AppBar(
           // leading: IconButton(
